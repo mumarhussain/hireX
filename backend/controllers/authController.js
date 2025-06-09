@@ -7,7 +7,7 @@ const jwtSecertKey = process.env.JWT_SECRET;
 
 export const registerUser = async (req, res) => {
   try {
-    const { name, email, password } = req.body;
+    const { name, email, password, role } = req.body;
 
     const existingUser = await User.findOne({ email });
     if (existingUser) {
@@ -20,6 +20,7 @@ export const registerUser = async (req, res) => {
       name,
       email,
       password,
+      role,
     });
     await newUser.save();
     res.status(201).json({
@@ -27,6 +28,7 @@ export const registerUser = async (req, res) => {
       _id: newUser._id,
       name: newUser.name,
       email: newUser.email,
+      role: newUser.role,
     });
   } catch (error) {
     console.log("Error occurr while creating new user", error);
@@ -40,7 +42,7 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     console.log(email, password);
-    
+
     const user = await User.findOne({ email });
 
     if (!user) {

@@ -1,22 +1,30 @@
 import mongoose from "mongoose";
 import bcrypt from "bcrypt"; // ← Make sure this line is present
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: true,
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    password: {
+      type: String,
+      required: true,
+      minLength: 8,
+    },
+    role: {
+      type: String,
+      enum: ["client", "freelancer"],
+      required: [true, "Role is required"],
+    },
   },
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  password: {
-    type: String,
-    required: true,
-    minLength: 8,
-  },
-});
+  { timestamps: true }
+);
 
 userSchema.pre("save", async function (next) {
   if (this.isModified("password")) {
