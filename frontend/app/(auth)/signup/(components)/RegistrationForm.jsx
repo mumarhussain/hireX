@@ -1,18 +1,42 @@
 "use client";
-import React from "react";
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 import InputField from "@/components/InputFields/InputFields";
 import Button from "@/components/Button/Button";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/context/authContext";
+import api from "@/lib/axios";
 
 export default function RegistrationForm() {
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
+  const { saveUser } = useAuth();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log("Form data:", data);
+  const onSubmit = async (data) => {
+    setLoading(true);
+    try {
+      const response = await api.post("/signup", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      toast.success("Registered successfully!");
+      saveUser(response.data);
+      router.push("/login");
+      setLoading(false);
+    } catch (error) {
+      toast.error(
+        error.response.data?.message || " Error occur while Registration"
+      );
+      setLoading(false);
+    }
   };
 
   return (
@@ -53,8 +77,8 @@ export default function RegistrationForm() {
           {...register("password", {
             required: "Password is required",
             minLength: {
-              value: 6,
-              message: "Password must be at least 6 characters",
+              value: 8,
+              message: "Password must be at least 8 characters",
             },
           })}
         />
@@ -79,7 +103,12 @@ export default function RegistrationForm() {
           )}
         </div>
 
-        <Button name="Register" className="w-full mt-4" type="submit" />
+        <Button
+          name="Register"
+          className="w-full mt-4"
+          type="submit"
+          loading={loading}
+        />
       </form>
     </div>
   );

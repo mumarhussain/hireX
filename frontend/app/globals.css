@@ -12,7 +12,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-popins: var(--font-popins);
+  --font-poppins: var(--font-poppins);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,5 +25,5 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Popins, sans-serif;
+  font-family: Poppins, sans-serif;
 }

@@ -6,9 +6,8 @@ dotenv.config();
 const jwtSecertKey = process.env.JWT_SECRET;
 
 export const registerUser = async (req, res) => {
+  const { name, email, password, role } = req.body;
   try {
-    const { name, email, password, role } = req.body;
-
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({
@@ -41,8 +40,6 @@ export const registerUser = async (req, res) => {
 export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
-    console.log(email, password);
-
     const user = await User.findOne({ email });
 
     if (!user) {
@@ -60,7 +57,8 @@ export const loginUser = async (req, res) => {
     res.cookie("token", token, {
       httpOnly: false,
       secure: false,
-      sameSite: "lax",
+      sameSite: "none",
+      maxAge: 24 * 60 * 60 * 1000,
     });
 
     res.status(200).json({
@@ -70,6 +68,7 @@ export const loginUser = async (req, res) => {
         _id: user._id,
         name: user.name,
         email: user.email,
+        role: user.role,
       },
     });
   } catch (error) {

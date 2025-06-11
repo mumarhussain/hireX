@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 import { authRouter } from "./routes/authRouter.js";
 dotenv.config();
 
@@ -9,7 +10,12 @@ const DB_URL = process.env.DB_URL;
 const PORT = process.env.PORT;
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: process.env.ORIGIN,
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 mongoose
@@ -24,4 +30,5 @@ mongoose
     console.log("Error occur while connection to DB");
   });
 
-app.use("/auth", authRouter);
+app.use(cookieParser());
+app.use("/", authRouter);
