@@ -7,6 +7,8 @@ const jwtSecertKey = process.env.JWT_SECRET;
 
 export const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
+  console.log(name, email, password, role);
+
   try {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
