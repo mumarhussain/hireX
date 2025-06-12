@@ -14,7 +14,7 @@ export default function FreelancerDashboard() {
   return (
     <div className="px-8 py-12">
       <h1 className="text-2xl font-semibold mb-4">
-        Welcome, {user.name}! This is your Freelancer Dashboard.
+        Welcome, {user?.name}! This is your Freelancer Dashboard.
       </h1>
       <Button
         name="Logout"

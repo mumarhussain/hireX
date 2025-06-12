@@ -9,6 +9,8 @@ export function useEnsureUser(requiredRole) {
   const router = useRouter();
 
   useEffect(() => {
+    console.log(user);
+
     const checkUser = async () => {
       if (!user) {
         try {

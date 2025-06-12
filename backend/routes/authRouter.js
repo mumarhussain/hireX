@@ -9,7 +9,7 @@ authRouter.post("/signup", registerUser);
 authRouter.post("/login", loginUser);
 
 authRouter.get("/me", requireAuth, async (req, res) => {
-  console.log("👀 /me req.cookies:", req.userId, req.cookies);
+  console.log("/mereq.cookies:", req.userId, req.cookies);
   const user = await User.findById(req.userId).select("-password");
   res.json({ user });
 });
