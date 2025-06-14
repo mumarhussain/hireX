@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const jwtSecertKey = process.env.JWT_SECRET;
+console.log(jwtSecertKey, "jwtSecertKey");
 
 export const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
