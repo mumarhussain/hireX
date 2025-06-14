@@ -10,7 +10,7 @@ export default function FreelancerDashboard() {
   const handleEnsureUser = async () => {
     console.log("clicked");
     try {
-      const res = await api.get("/me"); // withCredentials set by your axios instance
+      const res = await api.get("/me"); 
       console.log("checkUser", res);
     } catch (err) {
       console.error("Error fetching /me:", err);
