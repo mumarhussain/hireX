@@ -57,10 +57,12 @@ export const loginUser = async (req, res) => {
     });
 
     res.cookie("token", token, {
-      httpOnly: false,
-      secure: false,
-      sameSite: "none",
-      maxAge: 24 * 60 * 60 * 1000,
+      httpOnly: true, // JS can’t read it (good!)
+      secure: false, // true in production (HTTPS). For localhost, false.
+      sameSite: "none", // REQUIRED for cross‑site cookies
+      path: "/", // make it available to all routes
+      domain: "localhost",
+      maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
     res.status(200).json({

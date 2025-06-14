@@ -10,11 +10,10 @@ export function useEnsureUser(requiredRole) {
 
   useEffect(() => {
     console.log(user);
-
     const checkUser = async () => {
       if (!user) {
         try {
-          const res = await api.get("/me", { withCredentials: true });
+          const res = await api.get("/me");
           console.log("🚀 ~ checkUser ~ res:", res);
           saveUser(res.data.user);
         } catch {
