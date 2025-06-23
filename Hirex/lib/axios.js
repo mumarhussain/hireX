@@ -1,5 +1,4 @@
 import axios from "axios";
-import { getCookie } from "./cookies";
 
 const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_URL,

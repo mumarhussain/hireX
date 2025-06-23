@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import api from "@/lib/axios";
+import { fetchCurrentUser } from "@/lib/services";
+import Loader from "@/components/Loader/loader";
 
 const AuthContext = createContext();
 
@@ -12,8 +12,8 @@ export function AuthProvider({ children }) {
   useEffect(() => {
     (async () => {
       try {
-        const res = await api.get("/me");
-        setUser(res.data.user);
+        const res = await fetchCurrentUser();
+        console.log("checkUser", res);
       } catch {
         setUser(null);
       } finally {
@@ -28,7 +28,12 @@ export function AuthProvider({ children }) {
     setUser(null);
   };
 
-  if (!initialized) return <div>Loading authentication…</div>;
+  if (!initialized)
+    return (
+      <div className="fixed inset-0 flex items-center justify-center z-50">
+        <Loader size={40} />
+      </div>
+    );
 
   return (
     <AuthContext.Provider value={{ user, saveUser, logout }}>

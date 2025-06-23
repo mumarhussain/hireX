@@ -23,8 +23,10 @@ export default function LoginForm() {
     try {
       const res = await api.post("/login", data);
       const { token, user, message } = res.data;
+
       localStorage.setItem("token", token);
       saveUser(user);
+
       toast.success(message);
       RedirectToDashboard(user.role, router);
     } catch (err) {

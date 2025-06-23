@@ -1,24 +1,24 @@
 "use client";
-
 import { useEnsureUser } from "@/hooks/useEnsureUser";
 import Button from "@/components/Button/Button";
-import api from "@/lib/axios";
+import Loader from "@/components/Loader/loader";
+import { logout } from "@/lib/services";
 
 export default function FreelancerDashboard() {
   const { user } = useEnsureUser("freelancer");
 
   const handleEnsureUser = async () => {
-    console.log("clicked");
     try {
-      const res = await api.get("/me"); 
-      console.log("checkUser", res);
+      const logout = await logout();
+      console.log("Logged Out", logout);
     } catch (err) {
-      console.error("Error fetching /me:", err);
+      console.error("Error logging out user:", err);
     }
   };
   if (!user) {
-    <p>Loading your dashboard…</p>;
-    console.log("No User Found");
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <Loader size={40} />
+    </div>;
   }
 
   return (
