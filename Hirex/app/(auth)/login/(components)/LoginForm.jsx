@@ -10,8 +10,8 @@ import { useRouter } from "next/navigation";
 import { RedirectToDashboard } from "./RedirectToDashboard";
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const { saveUser } = useAuth();
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -21,15 +21,12 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const { data: payload, status } = await api.post("/login", data, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
-      if (status >= 200 && status < 300) {
-        toast.success(payload.message);
-        saveUser(payload.user);
-        RedirectToDashboard(payload.user.role, router);
-      }
+      const res = await api.post("/login", data);
+      const { token, user, message } = res.data;
+      localStorage.setItem("token", token);
+      saveUser(user);
+      toast.success(message);
+      RedirectToDashboard(user.role, router);
     } catch (err) {
       toast.error(err.response?.data?.message || "Error logging in");
     } finally {

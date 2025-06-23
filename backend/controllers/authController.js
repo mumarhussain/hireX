@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 dotenv.config();
 
 const jwtSecertKey = process.env.JWT_SECRET;
-console.log(jwtSecertKey, "jwtSecertKey");
 
 export const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
@@ -44,26 +43,13 @@ export const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     const user = await User.findOne({ email });
-
-    if (!user) {
-      return res.status(400).json({ message: "User not found" });
-    }
+    if (!user) return res.status(400).json({ message: "User not found" });
     const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
+    if (!isMatch)
       return res.status(400).json({ message: "Invalid credentials" });
-    }
 
-    const token = jwt.sign({ id: user?._id }, jwtSecertKey, {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
-    });
-
-    res.cookie("token", token, {
-      httpOnly: true, // JS can’t read it (good!)
-      secure: false, // true in production (HTTPS). For localhost, false.
-      sameSite: "none", // REQUIRED for cross‑site cookies
-      path: "/", // make it available to all routes
-      domain: "localhost",
-      maxAge: 24 * 60 * 60 * 1000, // 1 day
     });
 
     res.status(200).json({
@@ -76,10 +62,10 @@ export const loginUser = async (req, res) => {
         role: user.role,
       },
     });
-  } catch (error) {
-    console.log("Login error:", error);
+  } catch (err) {
+    console.error("Login error:", err);
     res
       .status(500)
-      .json({ message: "A server error occurr while logging in user" });
+      .json({ message: "A server error occurred while logging in" });
   }
 };

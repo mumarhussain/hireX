@@ -9,13 +9,10 @@ authRouter.post("/signup", registerUser);
 authRouter.post("/login", loginUser);
 
 authRouter.get("/me", requireAuth, async (req, res) => {
-  console.log("userId---->", req.userId);
   const user = await User.findById(req.userId).select("-password");
   res.json({ user });
 });
 
-authRouter.post("/logout", (req, res) => {
-  res
-    .cookie("token", "", { maxAge: 0, httpOnly: false, sameSite: "lax" })
-    .json({ message: "Logged out" });
+authRouter.post("/logout", (_req, res) => {
+  res.json({ message: "Logged out" });
 });
