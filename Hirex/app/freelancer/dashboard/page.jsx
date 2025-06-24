@@ -2,17 +2,17 @@
 import { useEnsureUser } from "@/hooks/useEnsureUser";
 import Button from "@/components/Button/Button";
 import Loader from "@/components/Loader/loader";
-import { logout } from "@/lib/services";
+import { fetchCurrentUser } from "@/lib/services";
 
 export default function FreelancerDashboard() {
   const { user } = useEnsureUser("freelancer");
 
   const handleEnsureUser = async () => {
     try {
-      const logout = await logout();
-      console.log("Logged Out", logout);
+      const fetchUser = await fetchCurrentUser();
+      console.log("fetchUser", fetchUser);
     } catch (err) {
-      console.error("Error logging out user:", err);
+      console.error("Error fetching user:", err);
     }
   };
   if (!user) {

@@ -6,14 +6,14 @@ import Loader from "@/components/Loader/loader";
 const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(undefined);
   const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     (async () => {
       try {
         const res = await fetchCurrentUser();
-        console.log("checkUser", res);
+        setUser(res);
       } catch {
         setUser(null);
       } finally {
@@ -23,10 +23,6 @@ export function AuthProvider({ children }) {
   }, []);
 
   const saveUser = (userData) => setUser(userData);
-  const logout = () => {
-    localStorage.removeItem("token");
-    setUser(null);
-  };
 
   if (!initialized)
     return (
@@ -36,7 +32,7 @@ export function AuthProvider({ children }) {
     );
 
   return (
-    <AuthContext.Provider value={{ user, saveUser, logout }}>
+    <AuthContext.Provider value={{ user, saveUser }}>
       {children}
     </AuthContext.Provider>
   );

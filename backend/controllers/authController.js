@@ -42,53 +42,43 @@ export const registerUser = async (req, res) => {
 };
 
 export const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
   try {
-    const { email, password } = req.body;
     const user = await User.findOne({ email });
-    if (!user) {
-      return sendError(res, {
-        status: STATUS.BAD_REQUEST,
-        message: MESSAGES.USER_NOT_FOUND,
-      });
-    }
+    if (!user) return res.status(400).json({ message: "User not found" });
 
     const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
-      return sendError(res, {
-        status: STATUS.BAD_REQUEST,
-        message: MESSAGES.INVALID_CREDENTIALS,
-      });
-    }
+    if (!isMatch)
+      return res.status(400).json({ message: "Invalid credentials" });
 
     const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "1d",
     });
 
-    return sendSuccess(res, {
-      status: STATUS.OK,
-      message: MESSAGES.LOGGED_IN,
-      data: {
-        token,
-        user: {
-          _id: user._id,
-          name: user.name,
-          email: user.email,
-          role: user.role,
-        },
+    res.cookie("token", token, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "Lax",
+      maxAge: 24 * 60 * 60 * 1000,
+    });
+
+    return res.status(200).json({
+      message: "User logged in successfully",
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
       },
     });
-  } catch (err) {
-    console.error("Login error:", err);
-    return sendError(res, {
-      status: STATUS.INTERNAL_ERROR,
-      message: MESSAGES.SERVER_ERROR,
-    });
+  } catch (error) {
+    console.error("Login Error:", error);
+    return res.status(500).json({ message: "Internal server error" });
   }
 };
 
-export const logoutUser = (_req, res) => {
-  return sendSuccess(res, {
-    status: STATUS.OK,
-    message: MESSAGES.LOGGED_OUT,
-  });
+export const logoutUser = (req, res) => {
+  res.clearCookie("token");
+  return res.status(200).json({ message: "Logged out successfully" });
 };

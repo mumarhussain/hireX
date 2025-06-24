@@ -8,6 +8,7 @@ import { useAuth } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { RedirectToDashboard } from "./RedirectToDashboard";
+import { login } from "@/lib/services";
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const { saveUser } = useAuth();
@@ -21,12 +22,8 @@ export default function LoginForm() {
   const onSubmit = async (data) => {
     setLoading(true);
     try {
-      const res = await api.post("/login", data);
-      const { token, user, message } = res.data;
-
-      localStorage.setItem("token", token);
+      const { user, message } = await login(data);
       saveUser(user);
-
       toast.success(message);
       RedirectToDashboard(user.role, router);
     } catch (err) {
