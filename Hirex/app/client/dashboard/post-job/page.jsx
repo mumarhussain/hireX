@@ -5,7 +5,6 @@ export default function PostJobs() {
 
   return (
     <div>
-      <h1>This is a JOB post's page</h1>
       <p>
         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Recusandae
         harum laudantium ut distinctio aut asperiores delectus aliquam tempore
