@@ -10,7 +10,6 @@ authRouter.post("/login", loginUser);
 
 authRouter.get("/me", requireAuth, async (req, res) => {
   const user = await User.findById(req.userId).select("-password");
-  console.log("🚀 ~ authRouter.get ~ user:", user);
   res.json({ user });
 });
 

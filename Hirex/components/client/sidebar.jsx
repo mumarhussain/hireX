@@ -35,7 +35,7 @@ export default function Sidebar({ currentPath, onLogout }) {
             }`}
           >
             <Icon size={20} className="text-themeColor" />
-            <span className="font-semibold">{label}</span>
+            <span className="font-medium">{label}</span>
           </Link>
         ))}
       </nav>
