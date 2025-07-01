@@ -32,12 +32,6 @@ export default function FreelancerDashboard() {
         type="button"
         onClick={handleEnsureUser}
       />
-      <p>
-        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Harum,
-        laboriosam sed quaerat ipsam, ipsum cumque quod saepe necessitatibus
-        accusamus voluptas, eveniet eos mollitia molestiae ipsa eaque et impedit
-        aliquid culpa?
-      </p>
     </div>
   );
 }

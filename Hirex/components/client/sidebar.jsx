@@ -44,7 +44,7 @@ export default function Sidebar({ currentPath, onLogout }) {
         onClick={onLogout}
         className="flex items-center gap-3 p-3 rounded-lg transition-colors duration-200 hover:bg-gray-800 w-full"
       >
-        <LogOut size={25} className="text-red-500" />
+        <LogOut size={20} className="text-red-500" />
         <span className="font-medium">Logout</span>
       </button>
     </aside>
