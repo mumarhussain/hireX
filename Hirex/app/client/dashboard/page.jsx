@@ -1,22 +1,10 @@
-"use client";
-import { usePathname, useRouter } from "next/navigation";
-import { useAuth } from "@/context/authContext";
-import Sidebar from "@/ui/client/sidebar";
+import { ClientLayout } from "@/ui/client/clientView";
+import React from "react";
 
-export default function ClientLayout({ children }) {
-  const router = useRouter();
-  const { logout } = useAuth();
-  const path = usePathname();
-
-  const handleLogout = () => {
-    logout();
-    router.push("/login");
-  };
-
+export default function ClientDashboard() {
   return (
-    <div className="flex">
-      <Sidebar currentPath={path} onLogout={handleLogout} />
-      <main className="flex-1">{children}</main>
+    <div>
+      <ClientLayout />
     </div>
   );
 }
