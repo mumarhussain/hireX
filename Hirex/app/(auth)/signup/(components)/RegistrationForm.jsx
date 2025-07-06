@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import InputField from "@/components/InputFields/InputFields";
-import Button from "@/components/Button/Button";
+import InputField from "@/components/InputFields";
+import Button from "@/components/Button";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";

@@ -1,7 +1,7 @@
 import React from "react";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
 
-export default function Button({ name, className, type, loading, onClick }) {
+const Button = ({ name, className, type, loading, onClick }) => {
   return (
     <button
       type={type}
@@ -16,4 +16,5 @@ export default function Button({ name, className, type, loading, onClick }) {
       )}
     </button>
   );
-}
+};
+export { Button };

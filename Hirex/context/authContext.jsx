@@ -1,7 +1,7 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { fetchCurrentUser } from "@/lib/services";
-import Loader from "@/components/Loader/loader";
+import Loader from "@/components/Loader";
 
 const AuthContext = createContext();
 

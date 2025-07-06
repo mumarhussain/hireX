@@ -1,7 +1,7 @@
 "use client";
 import { useEnsureUser } from "@/hooks/useEnsureUser";
-import Button from "@/components/Button/Button";
-import Loader from "@/components/Loader/loader";
+import Button from "@/components/Button";
+import Loader from "@/components/Loader";
 import { fetchCurrentUser } from "@/lib/services";
 
 export default function FreelancerDashboard() {

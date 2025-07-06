@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import InputField from "@/components/InputFields/InputFields";
-import Button from "@/components/Button/Button";
+import InputField from "@/components/InputFields";
+import Button from "@/components/Button";
 import api from "@/lib/axios";
 import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/authContext";
