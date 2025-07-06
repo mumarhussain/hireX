@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { RedirectToDashboard } from "../../../app/(auth)/login/(components)/RedirectToDashboard";
+import { RedirectToDashboard } from "./RedirectToDashboard";
 import { login } from "@/lib/services";
 const LoginForm = () => {
   const [loading, setLoading] = useState(false);
