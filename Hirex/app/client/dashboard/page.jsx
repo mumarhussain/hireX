@@ -1,7 +1,7 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
 import { useAuth } from "@/context/authContext";
-import Sidebar from "@/components/client/sidebar";
+import Sidebar from "@/ui/client/sidebar";
 
 export default function ClientLayout({ children }) {
   const router = useRouter();

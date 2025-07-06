@@ -21,7 +21,7 @@ const tabs = [
   { label: "Profile", href: "/client/dashboard/profile", icon: User },
 ];
 
-export default function Sidebar({ currentPath, onLogout }) {
+const Sidebar = ({ currentPath, onLogout }) => {
   return (
     <aside className="w-64 bg-black rounded-tr-4xl rounded-br-4xl text-white min-h-screen py-10 flex flex-col justify-between">
       {/* Top: Tabs */}
@@ -49,4 +49,6 @@ export default function Sidebar({ currentPath, onLogout }) {
       </button>
     </aside>
   );
-}
+};
+
+export { Sidebar };
