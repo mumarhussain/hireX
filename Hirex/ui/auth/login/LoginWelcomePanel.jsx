@@ -3,12 +3,7 @@ import React from "react";
 import Link from "next/link";
 import Button from "@/components/Button";
 
-export default function LoginWelcomePanel({
-  heading,
-  description,
-  buttonText,
-  linkHref,
-}) {
+const LoginWelcomePanel = ({ heading, description, buttonText, linkHref }) => {
   return (
     <div className="bg-white w-1/2">
       <div className="w-full h-full bg-themeColor rounded-l-full px-10 py-12 flex flex-col items-center justify-center text-center">
@@ -20,4 +15,6 @@ export default function LoginWelcomePanel({
       </div>
     </div>
   );
-}
+};
+
+export { LoginWelcomePanel };

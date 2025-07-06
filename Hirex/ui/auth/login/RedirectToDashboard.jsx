@@ -1,4 +1,4 @@
-export const RedirectToDashboard = (role, router) => {
+const RedirectToDashboard = (role, router) => {
   const paths = {
     freelancer: "/freelancer/dashboard",
     client: "/client/dashboard",
@@ -7,3 +7,4 @@ export const RedirectToDashboard = (role, router) => {
   const path = paths[role] || "/unauthorized";
   router.push(path);
 };
+export { RedirectToDashboard };

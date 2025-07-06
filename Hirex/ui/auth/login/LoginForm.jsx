@@ -7,9 +7,9 @@ import { useForm } from "react-hook-form";
 import { useAuth } from "@/context/authContext";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
-import { RedirectToDashboard } from "./RedirectToDashboard";
+import { RedirectToDashboard } from "../../../app/(auth)/login/(components)/RedirectToDashboard";
 import { login } from "@/lib/services";
-export default function LoginForm() {
+const LoginForm = () => {
   const [loading, setLoading] = useState(false);
   const { saveUser } = useAuth();
   const router = useRouter();
@@ -65,4 +65,6 @@ export default function LoginForm() {
       </form>
     </div>
   );
-}
+};
+
+export { LoginForm };

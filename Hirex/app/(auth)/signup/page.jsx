@@ -1,6 +1,6 @@
 "use client";
-import RegistrationForm from "./(components)/RegistrationForm";
-import WelcomePanel from "./(components)/WelcomePanel";
+import RegistrationForm from "../../../ui/auth/signup/RegistrationForm";
+import WelcomePanel from "../../../ui/auth/signup/WelcomePanel";
 
 function RegistrationPage() {
   return (
