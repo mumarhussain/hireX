@@ -1,5 +1,5 @@
-import LoginForm from "@/ui/auth/login/LoginForm";
-import LoginWelcomePanel from "@/ui/auth/login/LoginWelcomePanel";
+import { LoginForm } from "./LoginForm";
+import { LoginWelcomePanel } from "./LoginWelcomePanel";
 
 const LoginView = () => {
   return (

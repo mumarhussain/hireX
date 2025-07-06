@@ -1,15 +1,10 @@
-"use client";
-import RegistrationForm from "../../../ui/auth/signup/RegistrationForm";
-import WelcomePanel from "../../../ui/auth/signup/WelcomePanel";
+import { SignupView } from "@/ui/auth/signup/signupView";
+import React from "react";
 
-function RegistrationPage() {
+export default function Signup() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-black px-4 font-poppins">
-      <div className="w-full max-w-4xl flex rounded-[50px] overflow-hidden my-20">
-        <RegistrationForm />
-        <WelcomePanel />
-      </div>
+    <div>
+      <SignupView />
     </div>
   );
 }
-export default RegistrationPage;

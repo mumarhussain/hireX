@@ -1,14 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import InputField from "@/components/InputFields";
-import Button from "@/components/Button";
+import { InputField, Button } from "@/components";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/authContext";
 import api from "@/lib/axios";
 
-export default function RegistrationForm() {
+const RegistrationForm = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const { saveUser } = useAuth();
@@ -112,4 +111,6 @@ export default function RegistrationForm() {
       </form>
     </div>
   );
-}
+};
+
+export { RegistrationForm };

@@ -1,7 +1,6 @@
-"use client";
 import React from "react";
 import Link from "next/link";
-import Button from "@/components/Button";
+import { Button } from "@/components";
 
 const LoginWelcomePanel = ({ heading, description, buttonText, linkHref }) => {
   return (

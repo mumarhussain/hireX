@@ -1,9 +1,8 @@
-"use client";
 import React from "react";
 import Link from "next/link";
-import Button from "@/components/Button";
+import { Button } from "@/components";
 
-export default function WelcomePanel() {
+const WelcomePanel = () => {
   return (
     <div className="bg-white w-1/2">
       <div className="w-full h-full bg-themeColor rounded-l-full px-10 py-12 flex flex-col items-center justify-center text-center">
@@ -15,4 +14,5 @@ export default function WelcomePanel() {
       </div>
     </div>
   );
-}
+};
+export { WelcomePanel };
