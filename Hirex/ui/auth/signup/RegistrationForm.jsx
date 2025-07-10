@@ -37,7 +37,7 @@ const RegistrationForm = () => {
       setLoading(false);
     }
   };
-
+  const test = "Testing";
   return (
     <div className="w-1/2 bg-white px-10 py-12">
       <h1 className="text-3xl font-bold text-black mb-6">Registration</h1>
