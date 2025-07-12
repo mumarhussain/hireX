@@ -1,2 +1,1 @@
-export * from "./RegistrationForm";
-export * from "./WelcomePanel";
+export { default as SignupView } from "./signupView";

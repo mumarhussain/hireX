@@ -1,10 +1,4 @@
-import { LoginView } from "@/ui/auth/login/loginView";
-import React from "react";
-
+import { LoginView } from "@/ui/auth/login";
 export default function Login() {
-  return (
-    <div>
-      <LoginView />
-    </div>
-  );
+  return <LoginView />;
 }
