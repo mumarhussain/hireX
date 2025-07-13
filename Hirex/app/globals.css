@@ -7,6 +7,8 @@
 
 @theme {
   --color-themeColor: #aed264;
+  --color-lightBlue: #e6edff;
+
 }
 
 @theme inline {

@@ -7,7 +7,7 @@ const Button = ({ name, className, type, loading, onClick }) => {
       type={type}
       disabled={loading}
       onClick={onClick}
-      className={`px-12 mx-auto py-3 border-2  border-black text-black font-semibold rounded-xl hover:bg-black hover:text-themeColor cursor-pointer !text-center transition-colors duration-200 ${className}`}
+      className={`px-12 mx-auto py-3 border-2  border-black text-black font-semibold rounded-xl hover:bg-black hover:text-themeColor cursor-pointer !text-center transition duration-400 ${className}`}
     >
       {loading ? (
         <AiOutlineLoading3Quarters className="mx-auto flex items-center justify-center animate-spin text-lg text-center text-themeColor" />

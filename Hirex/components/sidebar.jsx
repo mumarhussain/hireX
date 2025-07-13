@@ -51,4 +51,4 @@ const Sidebar = ({ currentPath, onLogout }) => {
   );
 };
 
-export { Sidebar };
+export default Sidebar;
