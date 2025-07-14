@@ -6,7 +6,7 @@ const BasicInfoStep = ({ register, errors }) => {
     <div className="space-y-4">
       <InputField
         label="Job Title"
-        placeholder="e.g. Full Stack Developer"
+        placeholder="Full Stack Developer"
         {...register("title", { required: "Job title is required" })}
       />
       {errors.title && (
@@ -15,7 +15,7 @@ const BasicInfoStep = ({ register, errors }) => {
 
       <InputField
         label="Category"
-        placeholder="e.g. Web Development"
+        placeholder="Web Development"
         {...register("category", { required: "Category is required" })}
       />
       {errors.category && (
@@ -24,7 +24,7 @@ const BasicInfoStep = ({ register, errors }) => {
 
       <InputField
         label="Location"
-        placeholder="e.g. Remote or Lahore"
+        placeholder="Remote or Faisalabad"
         {...register("location")}
       />
     </div>

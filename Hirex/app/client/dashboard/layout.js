@@ -1,16 +1,19 @@
 "use client";
 import { usePathname, useRouter } from "next/navigation";
-import { useAuth } from "@/context/authContext";
+import { logout } from "@/lib/services";
 import Sidebar from "@/components/sidebar";
 
 export default function ClientDashboardLayout({ children }) {
   const router = useRouter();
-  const { logout } = useAuth();
   const path = usePathname();
 
-  const handleLogout = () => {
-    logout();
-    router.push("/login");
+  const handleLogout = async () => {
+    try {
+      await logout();
+      router.push("/login");
+    } catch (err) {
+      console.error("Error during logout", err);
+    }
   };
 
   return (

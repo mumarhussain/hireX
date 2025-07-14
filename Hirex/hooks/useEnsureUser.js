@@ -11,7 +11,7 @@ export function useEnsureUser(requiredRole) {
     if (user === null) {
       router.push("/login");
     } else if (user && user.role !== requiredRole) {
-      router.push(user.role === "client" ? "/client/dashboard" : "/");
+      router.push(user.role === "client" ? "/client/dashboard" : "/freelancer/dashboard");
     }
   }, [user, requiredRole, router]);
 
