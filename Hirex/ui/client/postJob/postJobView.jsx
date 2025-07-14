@@ -23,7 +23,7 @@ const PostJobView = () => {
 
   const onSubmit = (data) => {
     console.log("Step 2 Data:", data);
-    if (step >= 4) {
+    if (step === 3 && step >= 4) {
       nextStep();
       return;
     }
