@@ -4,6 +4,8 @@ import cors from "cors";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { authRouter } from "./routes/authRouter.js";
+import clientRouter from "./routes/clientRoutes.js";
+import freelancerRouter from "./routes/freelancerRouter.js";
 dotenv.config();
 
 const DB_URL = process.env.DB_URL;
@@ -33,3 +35,5 @@ mongoose
 app.use(cookieParser());
 app.use(express.urlencoded({ extended: true }));
 app.use("/", authRouter);
+app.use(clientRouter);
+app.use(freelancerRouter);
