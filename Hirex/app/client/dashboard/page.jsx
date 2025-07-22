@@ -1,5 +1,7 @@
+import { HomeView } from "@/ui/client/home";
 import React from "react";
 
-export default function ClientDashboard() {
-  return <div>Welcome to dashboard</div>;
-}
+const ClientDashboard = () => {
+  return <HomeView />;
+};
+export default ClientDashboard;

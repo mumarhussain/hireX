@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { StepHeader } from "./stepHeader";
 import { BasicInfoStep } from "./basicInfo";
 import { useForm } from "react-hook-form";
@@ -7,8 +7,6 @@ import { Button } from "@/components";
 import { AddDetails } from "./AddDetails";
 import { SetPreferences } from "./SetPreferences";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import { fetchCurrentUser } from "@/lib/services";
 
 const PostJobView = () => {
   const [step, setStep] = useState(1);
@@ -17,21 +15,6 @@ const PostJobView = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const router = useRouter();
-
-  useEffect(() => {
-    const loadUser = async () => {
-      try {
-        const user = await fetchCurrentUser();
-        console.log("fetchUser", user);
-      } catch (err) {
-        console.error("Error fetching user:", err);
-      }
-    };
-
-    // call it
-    loadUser();
-  }, []);
 
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);

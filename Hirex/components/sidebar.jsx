@@ -10,7 +10,7 @@ import {
 } from "lucide-react";
 
 const tabs = [
-  { label: "Dashboard", href: "/client/dashboard", icon: Home },
+  { label: "Home", href: "/client/dashboard", icon: Home },
   { label: "Post Job", href: "/client/dashboard/post-job", icon: Briefcase },
   { label: "My Jobs", href: "/client/dashboard/my-jobs", icon: FileText },
   {
@@ -23,7 +23,7 @@ const tabs = [
 
 const Sidebar = ({ currentPath, onLogout }) => {
   return (
-    <aside className="w-64 bg-black rounded-tr-4xl rounded-br-4xl text-white min-h-screen py-10 flex flex-col justify-between">
+    <aside className="sticky top-0 w-64 bg-black rounded-tr-4xl rounded-br-4xl text-white min-h-screen py-10 flex flex-col justify-between">
       {/* Top: Tabs */}
       <nav className="space-y-4">
         {tabs.map(({ label, href, icon: Icon }) => (
@@ -42,7 +42,7 @@ const Sidebar = ({ currentPath, onLogout }) => {
 
       <button
         onClick={onLogout}
-        className="flex items-center gap-3 p-3 rounded-lg transition-colors duration-200 hover:bg-gray-800 w-full"
+        className="cursor-pointer flex items-center gap-3 p-3 rounded-lg transition-colors duration-200 hover:bg-gray-800 w-full"
       >
         <LogOut size={20} className="text-red-500" />
         <span className="font-medium">Logout</span>

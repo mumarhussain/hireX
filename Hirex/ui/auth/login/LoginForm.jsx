@@ -23,6 +23,8 @@ const LoginForm = () => {
     try {
       const { user, message } = await login(data);
       saveUser(user);
+      console.log(user, "User Data");
+
       toast.success(message);
       RedirectToDashboard(user.role, router);
     } catch (err) {
