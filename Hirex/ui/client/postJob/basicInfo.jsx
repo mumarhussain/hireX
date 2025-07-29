@@ -3,7 +3,7 @@ import { InputField } from "@/components";
 
 const BasicInfoStep = ({ register, errors }) => {
   return (
-    <div className="space-y-4">
+    <div className=" space-y-4">
       <InputField
         label="Job Title"
         placeholder="Full Stack Developer"
@@ -25,8 +25,11 @@ const BasicInfoStep = ({ register, errors }) => {
       <InputField
         label="Location"
         placeholder="Remote or Faisalabad"
-        {...register("location")}
+        {...register("location", { required: "Location is required" })}
       />
+      {errors.location && (
+        <p className="text-red-500 text-sm">{errors.location.message}</p>
+      )}
     </div>
   );
 };

@@ -3,4 +3,5 @@ export const API_PATHS = {
   LOGOUT: "/logout",
   SIGN_UP: "/signup",
   ME: "/me",
+  POST_Job: "/client/dashboard/postjob",
 };

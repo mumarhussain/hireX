@@ -7,26 +7,44 @@ import { Button } from "@/components";
 import { AddDetails } from "./AddDetails";
 import { SetPreferences } from "./SetPreferences";
 import { toast } from "react-toastify";
+import { useRouter } from "next/navigation";
+import { postJob } from "@/lib/services";
+import { useJob } from "@/context/jobPostContext";
 
 const PostJobView = () => {
   const [step, setStep] = useState(1);
+  const [loading, setLoading] = useState(false);
+  const { setPostedJob } = useJob();
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-
   const nextStep = () => setStep((prev) => prev + 1);
   const prevStep = () => setStep((prev) => prev - 1);
 
-  const onSubmit = (data) => {
-    console.log("Step 2 Data:", data);
+  const router = useRouter();
+
+  const onSubmit = async (data) => {
+    if (step === 3) {
+      setLoading(true);
+      try {
+        const jobData = await postJob(data);
+        if (jobData.success) {
+          toast.success(jobData.message || "Job posted successfully!");
+          setPostedJob(jobData.data);
+          router.push("/client/dashboard");
+        }
+      } catch (error) {
+        console.log("Error occur", error);
+      } finally {
+        setLoading(false);
+      }
+    }
     if (step < 3) {
       nextStep();
       return;
     }
-    toast.success("Job posted successfully!");
-    router.push("/client/dashboard");
   };
   return (
     <div className="max-w-3xl mx-auto">
@@ -45,11 +63,11 @@ const PostJobView = () => {
               className="bg-gray-300 text-black"
             />
           )}
-
           <Button
             type="submit"
-            name={step === 1 ? "Next" : step === 2 ? "Continue" : "Post Job"}
+            name={step === 1 ? "Next" : step === 2 ? "Next" : "Post Job"}
             className="ml-auto"
+            loading={loading}
           />
         </div>
       </form>

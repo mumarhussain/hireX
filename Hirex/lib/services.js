@@ -15,3 +15,8 @@ export async function logout() {
   const res = await api.post(API_PATHS.LOGOUT);
   return res;
 }
+
+export async function postJob(data) {
+  const res = await api.post(API_PATHS.POST_Job, { data });
+  return res.data;
+}

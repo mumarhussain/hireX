@@ -27,6 +27,8 @@ const RegistrationForm = () => {
       });
 
       toast.success("Registered successfully!");
+      console.log();
+      
       saveUser(response.data);
       router.push("/login");
       setLoading(false);

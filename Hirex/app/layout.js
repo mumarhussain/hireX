@@ -3,6 +3,7 @@ import "./globals.css";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AuthProvider } from "@/context/authContext";
+import { JobProvider } from "@/context/jobPostContext";
 const poppins = Poppins({
   weight: "400",
   variable: "--font-poppins",
@@ -19,7 +20,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.variable} font-sans antialiased`}>
         <AuthProvider>
-          {children}
+          <JobProvider>{children}</JobProvider>
           <ToastContainer
             position="top-right"
             autoClose={3000}

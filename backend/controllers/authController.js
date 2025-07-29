@@ -1,28 +1,21 @@
 import { User } from "../models/usersModel.js";
 import jwt from "jsonwebtoken";
-import {
-  STATUS,
-  MESSAGES,
-  sendError,
-  sendSuccess,
-} from "../config/response.js";
+import { sendBadRequest, sendSuccess } from "../utils/response.js";
 
 export const registerUser = async (req, res) => {
   const { name, email, password, role } = req.body;
 
   try {
     if (await User.exists({ email })) {
-      return sendError(res, {
-        status: STATUS.CONFLICT,
-        message: MESSAGES.EMAIL_ALREADY_REGISTERED,
+      return sendBadRequest(res, {
+        message: "Email already have an account on this email",
       });
     }
 
     const newUser = await User.create({ name, email, password, role });
 
     return sendSuccess(res, {
-      status: STATUS.CREATED,
-      message: MESSAGES.USER_CREATED,
+      message: "Signed In Successfully",
       data: {
         user: {
           _id: newUser._id,
@@ -56,7 +49,7 @@ export const loginUser = async (req, res) => {
       { id: user._id, role: user.role },
       process.env.JWT_SECRET,
       {
-        expiresIn: "1d",
+        expiresIn: "2h",
       }
     );
 
@@ -64,7 +57,7 @@ export const loginUser = async (req, res) => {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "Lax",
-      maxAge: 24 * 60 * 60 * 1000,
+      maxAge: 2 * 60 * 60 * 1000,
     });
 
     return res.status(200).json({

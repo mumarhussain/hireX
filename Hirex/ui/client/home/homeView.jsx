@@ -11,10 +11,15 @@ import { useEnsureUser } from "@/hooks/useEnsureUser";
 import { useRouter } from "next/navigation";
 import { fetchCurrentUser } from "@/lib/services";
 import Link from "next/link";
-
+import { Loader } from "@/components";
 const HomeView = () => {
   const { user } = useEnsureUser("client");
   const router = useRouter();
+  if (!user) {
+    <div className="fixed inset-0 flex items-center justify-center z-50">
+      <Loader size={40} />
+    </div>;
+  }
 
   useEffect(() => {
     const loadProfile = async () => {
@@ -28,12 +33,6 @@ const HomeView = () => {
 
     loadProfile();
   }, [router]);
-
-  if (!user) {
-    <div className="fixed inset-0 flex items-center justify-center z-50">
-      <Loader size={40} />
-    </div>;
-  }
 
   const metrics = [
     { label: "Active Jobs", value: 3, icon: Briefcase },
@@ -62,14 +61,8 @@ const HomeView = () => {
     },
   ];
 
-  const tips = [
-    "Include clear deliverables and deadlines.",
-    "Ask for a brief portfolio to gauge quality.",
-    "Respond promptly to keep top talent engaged.",
-  ];
-
   return (
-    <div className="p-8 bg-blue-100/80 rounded-4xl min-h-screen text-black space-y-12">
+    <div className="max-w-7xl mx-auto p-10 bg-blue-100/80 rounded-4xl min-h-screen text-black space-y-12">
       {/* Metrics */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         {metrics.map(({ label, value, icon: Icon }) => (
@@ -134,16 +127,6 @@ const HomeView = () => {
       </div>
 
       {/* Tips */}
-      <div className="bg-white bg-opacity-10 rounded-2xl p-6">
-        <h2 className="text-xl font-semibold text-black mb-4">
-          Tips for Better Proposals
-        </h2>
-        <ul className="list-disc list-inside space-y-2 text-gray-600">
-          {tips.map((tip, i) => (
-            <li key={i}>{tip}</li>
-          ))}
-        </ul>
-      </div>
     </div>
   );
 };
